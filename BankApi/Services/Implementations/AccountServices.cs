@@ -178,10 +178,13 @@ namespace BankApi.Services.Implementations
                 CreatePinHash(pin, out pinHash, out pinSalt);
                 accountToBeUpdated.PinHash = pinHash;
                 accountToBeUpdated.PinSalt = pinSalt;
+                
+
                 //else change email for him
                 accountToBeUpdated.PhoneNumber = account.PhoneNumber;
 
             }
+            accountToBeUpdated.DateLastUpdated = DateTime.Now;
             //now, persist this updaye to the db
             _context.Accounts.Update(accountToBeUpdated);
             _context.SaveChanges();
@@ -189,3 +192,4 @@ namespace BankApi.Services.Implementations
         }
     }
 }
+ 
